@@ -6,6 +6,7 @@ package interfaces;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 import models.SesionTutoria;
 
 /**
@@ -15,5 +16,7 @@ import models.SesionTutoria;
 public interface ISesionTutoriaDAO {
     boolean programarTutoria(Date fecha, Time hora, String estado, int id_tutor, int id_estudiante, int id_materia);
     boolean cambiarEstadoTutoria(SesionTutoria sesion);
+    List<SesionTutoria> obtenerTodos();
+    
     
 }

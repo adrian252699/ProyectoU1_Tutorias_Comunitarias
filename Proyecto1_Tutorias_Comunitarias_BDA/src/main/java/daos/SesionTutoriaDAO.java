@@ -9,8 +9,11 @@ import interfaces.ISesionTutoriaDAO;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
 import models.SesionTutoria;
 
 /**
@@ -56,6 +59,34 @@ public class SesionTutoriaDAO implements ISesionTutoriaDAO{
             System.err.println("Error al actualizar sesion de tutoria: " + e.getMessage());
             return false;
         }
+    }
+
+    @Override
+    public List<SesionTutoria> obtenerTodos() {
+        String sql = "SELECT id_sesion,fecha,hora,estado_sesion,id_tutor,id_estudiante,id_materia FROM sesiontutoria";
+        List<SesionTutoria> listaSesiones = new ArrayList<>();
+        
+        try(Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                SesionTutoria sesion = new SesionTutoria();
+                sesion.setId_sesion(rs.getInt("id_sesion"));
+                sesion.setFecha(rs.getDate("fecha"));
+                sesion.setHora(rs.getTime("hora"));
+                sesion.setEstado_sesion(rs.getString("estado_sesion"));
+                sesion.setId_tutor(rs.getInt("id_tutor"));
+                sesion.setId_estudiante(rs.getInt("id_estudiante"));
+                sesion.setId_materia(rs.getInt("id_materia"));
+                listaSesiones.add(sesion);
+            }
+        
+        }catch(SQLException e){
+            System.err.println("Error al obtener todas las sesiones de tutoria: " + e.getMessage());
+            
+        }
+
+        return listaSesiones;
     }
     
 }

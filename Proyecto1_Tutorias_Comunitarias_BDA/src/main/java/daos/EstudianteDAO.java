@@ -128,15 +128,14 @@ public class EstudianteDAO implements IEstudianteDAO{
 
     @Override
     public boolean actualizar(Estudiante estudiante) {
-        String sql = "UPDATE estudiante SET nombre = ?, grado_escolar = ?, escuela_procedencia = ?, telefono_contacto = ?, fecha_nacimiento = ? WHERE id_estudiante = ?";
+        String sql = "UPDATE estudiante SET nombre = ?, grado_escolar = ?, escuela_procedencia = ?, telefono_contacto = ? WHERE id_estudiante = ?";
         
         try(Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
             ps.setString(1, estudiante.getNombre());
             ps.setString(2, estudiante.getGrado_escolar());
             ps.setString(3, estudiante.getEscuela_procedencia());
             ps.setString(4, estudiante.getTelefono_contacto());
-            ps.setDate(5, estudiante.getFecha_nacimiento());
-            ps.setInt(6, estudiante.getId_estudiante());
+            ps.setInt(5, estudiante.getId_estudiante());
             
             return ps.executeUpdate() > 0;
             

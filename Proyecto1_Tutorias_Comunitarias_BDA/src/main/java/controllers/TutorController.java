@@ -59,7 +59,12 @@ public class TutorController {
         return tutorDAO.obtenerTodos();
     }
     
-    public boolean actualizarTutor(String nombre, String especialidad, String telefono, String correo){
+    public boolean actualizarTutor(int idTutor,String nombre, String especialidad, String telefono, String correo){
+        if (idTutor <= 0) {
+            System.err.println("ID de tutor inválido.");
+            return false;
+        }
+        
         if (nombre == null || nombre.trim().isEmpty()) {
             System.err.println("El nombre del tutor no puede estar vacío.");
             return false;
@@ -74,7 +79,7 @@ public class TutorController {
         
         if (correo == null) correo = "";
             
-        Tutor tutorActualizado = new Tutor(nombre, especialidad, telefono, correo);
+        Tutor tutorActualizado = new Tutor(idTutor,nombre, especialidad, telefono, correo);
         
         return tutorDAO.actualizar(tutorActualizado);
     }

@@ -26,6 +26,14 @@ public class Materia {
         this.descripcion = descripcion;
     }
 
+    public Materia(String nombre, String nivel_educativo, String descripcion) {
+        this.nombre = nombre;
+        this.nivel_educativo = nivel_educativo;
+        this.descripcion = descripcion;
+    }
+    
+    
+
     public int getId_materia() {
         return id_materia;
     }

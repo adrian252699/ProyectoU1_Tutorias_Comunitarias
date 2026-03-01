@@ -28,6 +28,15 @@ public class Tutor {
         this.correo = correo;
     }
 
+    public Tutor(String nombre, String especialidad, String telefono, String correo) {
+        this.nombre = nombre;
+        this.especialidad = especialidad;
+        this.telefono = telefono;
+        this.correo = correo;
+    }
+    
+    
+
     public int getId_tutor() {
         return id_tutor;
     }

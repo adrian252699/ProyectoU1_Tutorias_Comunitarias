@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import daos.EstudianteDAO;
 import interfaces.IEstudianteDAO;
 import java.sql.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ public class EstudianteController {
     private final IEstudianteDAO estudianteDAO;
 
     public EstudianteController() {
-        this.estudianteDAO = null;
+        this.estudianteDAO = new EstudianteDAO();
     }
     
     public boolean insertarEstudiante(String nombre, String grado_escolar, String escuela_procedencia, String telefono, Date fecha_nacimiento){
@@ -107,7 +108,7 @@ public class EstudianteController {
         return estudianteDAO.eliminar(idEstudiante);
     }
     
-    public DefaultTableModel obtenerTablaClientes() {
+    public DefaultTableModel obtenerTablaEstudiantes() {
         String[] columnas = {"ID", "NOMBRE", "GRADO ESCOLAR", "ESCUELA PROCEDENCIA","FECHA NACIMIENTO", "TELEFONO"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         List<Estudiante> lista = estudianteDAO.obtenerTodos();
@@ -117,7 +118,7 @@ public class EstudianteController {
         return modelo;
     }
     
-    public DefaultTableModel obtenerTablaClientesFiltro(String filtro) {
+    public DefaultTableModel obtenerTablaEstudiantesFiltro(String filtro) {
         String[] columnas = {"ID", "NOMBRE", "GRADO ESCOLAR", "ESCUELA PROCEDENCIA","FECHA NACIMIENTO", "TELEFONO"};
         DefaultTableModel modelo = new DefaultTableModel(null, columnas);
         List<Estudiante> lista = estudianteDAO.obtenerTodosPorFiltro(filtro);

@@ -5,6 +5,7 @@
 package interfaces;
 
 import java.util.List;
+import models.Disponibilidad;
 import models.Tutor;
 
 /**
@@ -18,4 +19,7 @@ public interface ITutorDAO {
     List<Tutor> obtenerTodosPorFiltro(String filtro);
     boolean actualizar(Tutor tutor);
     boolean eliminar(int idTutor);
+    boolean agregarDisponibilidad(Disponibilidad disponibilidad);
+    List<Disponibilidad> consultarDisponibilidades(int idTutor);
+    boolean modificarDisponibilidad(Disponibilidad disponibilidad);
 }

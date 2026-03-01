@@ -6,11 +6,14 @@ package interfaces;
 
 import java.sql.Date;
 import java.sql.Time;
+import models.SesionTutoria;
 
 /**
  *
  * @author jalt2
  */
-public interface IDisponibilidadDAO {
-    boolean agregarDisponibilidad(Date dia, Time horaInicio, Time horaFin, int idTutor);
+public interface ISesionTutoriaDAO {
+    boolean programarTutoria(Date fecha, Time hora, String estado, int id_tutor, int id_estudiante, int id_materia);
+    boolean cambiarEstadoTutoria(SesionTutoria sesion);
+    
 }

@@ -46,12 +46,12 @@ public class SesionTutoriaDAO implements ISesionTutoriaDAO{
     
     //Metodo para cambiar estado de la sesion de programada a en curso, o de en curso a completada
     @Override
-    public boolean cambiarEstadoTutoria(SesionTutoria sesion) {
+    public boolean cambiarEstadoTutoria(int id, String estado) {
         String sql = "UPDATE sesiontutoria SET estado_sesion = ? WHERE id_sesion = ?";
         
         try(Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ps.setString(1, sesion.getEstado_sesion());
-            ps.setInt(2, sesion.getId_sesion());
+            ps.setString(1, estado);
+            ps.setInt(2, id);
 
             return ps.executeUpdate() > 0;
             
@@ -63,27 +63,53 @@ public class SesionTutoriaDAO implements ISesionTutoriaDAO{
 
     @Override
     public List<SesionTutoria> obtenerTodos() {
-        String sql = "SELECT id_sesion,fecha,hora,estado_sesion,id_tutor,id_estudiante,id_materia FROM sesiontutoria";
+
+        String sql = """
+            SELECT s.id_sesion,
+                   s.fecha,
+                   s.hora,
+                   s.estado_sesion,
+                   s.id_tutor,
+                   s.id_estudiante,
+                   s.id_materia,
+                   t.nombre AS nombre_tutor,
+                   e.nombre AS nombre_estudiante,
+                   m.nombre AS nombre_materia
+            FROM sesiontutoria s
+            JOIN tutor t ON s.id_tutor = t.id_tutor
+            JOIN estudiante e ON s.id_estudiante = e.id_estudiante
+            JOIN materia m ON s.id_materia = m.id_materia
+        """;
+
         List<SesionTutoria> listaSesiones = new ArrayList<>();
-        
-        try(Connection conn = ConexionDB.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)){
-            ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {                
+
+        try (Connection conn = ConexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
                 SesionTutoria sesion = new SesionTutoria();
+
                 sesion.setId_sesion(rs.getInt("id_sesion"));
                 sesion.setFecha(rs.getDate("fecha"));
                 sesion.setHora(rs.getTime("hora"));
                 sesion.setEstado_sesion(rs.getString("estado_sesion"));
+
                 sesion.setId_tutor(rs.getInt("id_tutor"));
                 sesion.setId_estudiante(rs.getInt("id_estudiante"));
                 sesion.setId_materia(rs.getInt("id_materia"));
+
+                
+                sesion.setNombreTutor(rs.getString("nombre_tutor"));
+                sesion.setNombreEstudiante(rs.getString("nombre_estudiante"));
+                sesion.setNombreMateria(rs.getString("nombre_materia"));
+
                 listaSesiones.add(sesion);
             }
-        
-        }catch(SQLException e){
-            System.err.println("Error al obtener todas las sesiones de tutoria: " + e.getMessage());
-            
+
+        } catch (SQLException e) {
+            System.err.println("Error al obtener todas las sesiones: " + e.getMessage());
         }
 
         return listaSesiones;

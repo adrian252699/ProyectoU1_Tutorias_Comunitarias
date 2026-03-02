@@ -198,6 +198,8 @@ public class FrmMaterias extends javax.swing.JPanel {
 
         jLabel2.setText("ID Materia:");
 
+        txtIdMateria.setEnabled(false);
+
         jLabel3.setText("Nombre:");
 
         jLabel4.setText("Nivel Educativo:");

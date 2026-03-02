@@ -9,7 +9,6 @@ import interfaces.ISesionTutoriaDAO;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
-import javax.swing.table.DefaultTableModel;
 import models.SesionTutoria;
 
 /**
@@ -18,6 +17,7 @@ import models.SesionTutoria;
  */
 public class SesionTutoriaController {
     private final ISesionTutoriaDAO sesionDAO;
+    
 
     public SesionTutoriaController() {
         this.sesionDAO = new SesionTutoriaDAO();
@@ -57,27 +57,29 @@ public class SesionTutoriaController {
         return sesionDAO.programarTutoria(fecha, hora, estado, idTutor, idEstudiante, idMateria);
     }
     
-    public boolean cambiarEstadoSesion(SesionTutoria sesion){
+    public boolean cambiarEstadoSesion(int id,String estado){
         
-        if (sesion == null) {
-            System.err.println("La sesion no puede estar vacía.");
-        }
+//        if (sesion == null) {
+//            System.err.println("La sesion no puede estar vacía.");
+//        }
         
-        return sesionDAO.cambiarEstadoTutoria(sesion);
+        
+        
+        return sesionDAO.cambiarEstadoTutoria(id,estado);
     }
     
     public List<SesionTutoria> listarSesiones(){
         return sesionDAO.obtenerTodos();
     }
     
-    public DefaultTableModel obtenerTablaSesiones() {
-        String[] columnas = {"ID", "FECHA", "HORA", "ESTADO SESION", "ID TUTOR", "ID ESTUDIANTE", "ID MATERIA"};
-        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
-        List<SesionTutoria> lista = sesionDAO.obtenerTodos();
-        for (SesionTutoria s : lista) {
-            modelo.addRow(new Object[]{s.getId_sesion(),s.getFecha(),s.getHora(),s.getEstado_sesion(),s.getId_tutor(),s.getId_estudiante(),s.getId_materia()});
-        }
-        return modelo;
-    }
+//    public DefaultTableModel obtenerTablaSesiones() {
+//        String[] columnas = {"ID", "FECHA", "HORA", "ESTADO SESION", "TUTOR", "ESTUDIANTE", "MATERIA"};
+//        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+//        List<SesionTutoria> lista = sesionDAO.obtenerTodos();
+//        for (SesionTutoria s : lista) {
+//            modelo.addRow(new Object[]{s.getId_sesion(),s.getFecha(),s.getHora(),s.getEstado_sesion(),frmSesiones.getTutor().getNombre(),frmSesiones.getEstudiante().getNombre(),frmSesiones.getMateria().getNombre()});
+//        }
+//        return modelo;
+//    }
     
 }

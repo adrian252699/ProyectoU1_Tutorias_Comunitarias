@@ -15,7 +15,7 @@ import models.SesionTutoria;
  */
 public interface ISesionTutoriaDAO {
     boolean programarTutoria(Date fecha, Time hora, String estado, int id_tutor, int id_estudiante, int id_materia);
-    boolean cambiarEstadoTutoria(SesionTutoria sesion);
+    boolean cambiarEstadoTutoria(int id, String estado);
     List<SesionTutoria> obtenerTodos();
     
     

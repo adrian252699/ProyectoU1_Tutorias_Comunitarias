@@ -20,6 +20,10 @@ public class SesionTutoria {
     private int id_tutor;
     private int id_estudiante;
     private int id_materia;
+    
+    private String nombreTutor;
+    private String nombreEstudiante;
+    private String nombreMateria;
 
     public SesionTutoria() {
     }
@@ -33,6 +37,13 @@ public class SesionTutoria {
         this.id_estudiante = id_estudiante;
         this.id_materia = id_materia;
     }
+
+    public SesionTutoria(int id_sesion, String estado_sesion) {
+        this.id_sesion = id_sesion;
+        this.estado_sesion = estado_sesion;
+    }
+    
+    
 
     public int getId_sesion() {
         return id_sesion;
@@ -89,6 +100,34 @@ public class SesionTutoria {
     public void setId_materia(int id_materia) {
         this.id_materia = id_materia;
     }
+
+    public String getNombreTutor() {
+        return nombreTutor;
+    }
+
+    public void setNombreTutor(String nombreTutor) {
+        this.nombreTutor = nombreTutor;
+    }
+
+    public String getNombreEstudiante() {
+        return nombreEstudiante;
+    }
+
+    public void setNombreEstudiante(String nombreEstudiante) {
+        this.nombreEstudiante = nombreEstudiante;
+    }
+
+    public String getNombreMateria() {
+        return nombreMateria;
+    }
+
+    public void setNombreMateria(String nombreMateria) {
+        this.nombreMateria = nombreMateria;
+    }
+    
+    
+    
+    
 
     @Override
     public int hashCode() {

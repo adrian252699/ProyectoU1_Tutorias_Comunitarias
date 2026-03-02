@@ -12,19 +12,19 @@ INSERT INTO tutor (nombre, especialidad, telefono, correo) VALUES
 -- INSERT ESTUDIANTES
 -- =========================
 INSERT INTO estudiante (nombre, grado_escolar, escuela_procedencia, telefono_contacto, fecha_nacimiento) VALUES
-('María Torres', '3° Secundaria', 'Secundaria Técnica #5', '6444567890', '2009-05-14'),
-('Luis Hernández', '2° Secundaria', 'Secundaria Federal #2', '6445678901', '2010-08-21'),
-('Sofía Navarro', '1° Preparatoria', 'Preparatoria CBTIS 37', '6446789012', '2008-02-10'),
-('Diego Morales', '6° Primaria', 'Primaria Benito Juárez', '6447890123', '2012-11-03');
+('María Torres', 'Basico', 'Secundaria Técnica #5', '6444567890', '2009-05-14'),
+('Luis Hernández', 'Basico', 'Secundaria Federal #2', '6445678901', '2010-08-21'),
+('Sofía Navarro', 'Superior', 'Preparatoria CBTIS 37', '6446789012', '2008-02-10'),
+('Diego Morales', 'Basico', 'Primaria Benito Juárez', '6447890123', '2012-11-03');
 
 -- =========================
 -- INSERT MATERIAS
 -- =========================
 INSERT INTO materia (nombre, nivel_educativo, descripcion) VALUES
-('Álgebra', 'Secundaria', 'Resolución de ecuaciones y expresiones algebraicas'),
-('Comprensión Lectora', 'Secundaria', 'Análisis y comprensión de textos'),
-('Física Básica', 'Preparatoria', 'Conceptos fundamentales de física'),
-('Matemáticas Básicas', 'Primaria', 'Operaciones aritméticas fundamentales');
+('Álgebra', 'Basico', 'Resolución de ecuaciones y expresiones algebraicas'),
+('Comprensión Lectora', 'Basico', 'Análisis y comprensión de textos'),
+('Física Básica', 'Superior', 'Conceptos fundamentales de física'),
+('Cálculo Diferencial', 'Universidad', 'Límites, derivadas y aplicaciones');
 
 -- =========================
 -- INSERT DISPONIBILIDAD

@@ -9,6 +9,7 @@ import interfaces.ISesionTutoriaDAO;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import models.SesionTutoria;
 
 /**
@@ -38,7 +39,12 @@ public class SesionTutoriaController {
             System.err.println("El estado de la sesion no puede estar vacía.");
             return false;
         }
-        
+        if (!(estado.equalsIgnoreCase("Programada")
+                || estado.equalsIgnoreCase("Completada")
+                || estado.equalsIgnoreCase("Cancelada"))) {
+            System.err.println("El estado de la sesión no es válido.");
+            return false;
+        }
         if (idTutor <= 0) {
             System.err.println("ID de tutor inválido.");
             return false;
@@ -59,11 +65,22 @@ public class SesionTutoriaController {
     
     public boolean cambiarEstadoSesion(int id,String estado){
         
-//        if (sesion == null) {
-//            System.err.println("La sesion no puede estar vacía.");
-//        }
-        
-        
+        if (id <= 0) {
+            System.err.println("ID de sesión inválido.");
+            return false;
+        }
+
+        if (estado == null || estado.trim().isEmpty()) {
+            System.err.println("El estado de la sesión no puede estar vacío.");
+            return false;
+        }
+
+        if (!(estado.equalsIgnoreCase("Programada")
+                || estado.equalsIgnoreCase("Completada")
+                || estado.equalsIgnoreCase("Cancelada"))) {
+            System.err.println("El estado de la sesión no es válido.");
+            return false;
+        }
         
         return sesionDAO.cambiarEstadoTutoria(id,estado);
     }
@@ -71,15 +88,17 @@ public class SesionTutoriaController {
     public List<SesionTutoria> listarSesiones(){
         return sesionDAO.obtenerTodos();
     }
-    
-//    public DefaultTableModel obtenerTablaSesiones() {
-//        String[] columnas = {"ID", "FECHA", "HORA", "ESTADO SESION", "TUTOR", "ESTUDIANTE", "MATERIA"};
-//        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
-//        List<SesionTutoria> lista = sesionDAO.obtenerTodos();
-//        for (SesionTutoria s : lista) {
-//            modelo.addRow(new Object[]{s.getId_sesion(),s.getFecha(),s.getHora(),s.getEstado_sesion(),frmSesiones.getTutor().getNombre(),frmSesiones.getEstudiante().getNombre(),frmSesiones.getMateria().getNombre()});
-//        }
-//        return modelo;
-//    }
-    
+    public DefaultTableModel obtenerTablaSesiones() {
+        String[] columnas = {"ID", "FECHA", "HORA", "ESTADO", "ID TUTOR", "ID ESTUDIANTE", "ID MATERIA"};
+        DefaultTableModel modelo = new DefaultTableModel(null, columnas);
+        List<SesionTutoria> lista = sesionDAO.obtenerTodos();
+        for (SesionTutoria s : lista) {
+            modelo.addRow(new Object[]{s.getId_sesion(),s.getFecha(),s.getHora(),s.getEstado_sesion(),s.getId_tutor(),s.getId_estudiante(),s.getId_materia()});
+        }
+        return modelo;
 }
+  
+}
+
+    
+

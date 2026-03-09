@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package views;
 
 import controllers.EstudianteController;
@@ -11,7 +7,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author jalt2
+ * @author Ricardo
  */
 public class FrmEstudiantes extends javax.swing.JPanel {
     
@@ -22,6 +18,18 @@ public class FrmEstudiantes extends javax.swing.JPanel {
      */
     public FrmEstudiantes() {
         initComponents();
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
+        btnGuardar.setForeground(java.awt.Color.WHITE);
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
+        btnCancelar.setForeground(java.awt.Color.WHITE);
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
+        btnEliminar.setForeground(java.awt.Color.WHITE);
+
+        // Título
+        jLabel1.setText("<html><font color='white'>MENU</font> <font color='#f97316'>ESTUDIANTES</font></html>");
+        jLabel1.putClientProperty("FlatLaf.styleClass", "h1");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         clEstudiante = new EstudianteController();
         cargarTablaEstudiantes();
         this.btnEliminar.setVisible(false);
@@ -238,6 +246,8 @@ public class FrmEstudiantes extends javax.swing.JPanel {
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235)); // Azul brillante
+        btnGuardar.setForeground(java.awt.Color.WHITE);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -246,6 +256,8 @@ public class FrmEstudiantes extends javax.swing.JPanel {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99)); // Gris oscuro oscuro
+        btnCancelar.setForeground(java.awt.Color.WHITE);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -254,6 +266,8 @@ public class FrmEstudiantes extends javax.swing.JPanel {
 
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38)); // Rojo
+        btnEliminar.setForeground(java.awt.Color.WHITE);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);

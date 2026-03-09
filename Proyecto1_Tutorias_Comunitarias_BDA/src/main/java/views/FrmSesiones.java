@@ -24,7 +24,7 @@ import models.Tutor;
 
 /**
  *
- * @author jalt2
+ * @author Ricardo
  */
 public class FrmSesiones extends javax.swing.JPanel {
     
@@ -41,6 +41,17 @@ public class FrmSesiones extends javax.swing.JPanel {
      */
     public FrmSesiones() {
         initComponents();
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
+        btnGuardar.setForeground(java.awt.Color.WHITE);
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
+        btnCancelar.setForeground(java.awt.Color.WHITE);
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
+        btnEliminar.setForeground(java.awt.Color.WHITE);
+
+        jLabel1.setText("<html><font color='white'>MENU</font> <font color='#f97316'>SESIONES</font></html>");
+        jLabel1.putClientProperty("FlatLaf.styleClass", "h1");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         clEstudiante= new EstudianteController();
         seController = new SesionTutoriaController();
         tuController = new TutorController();
@@ -250,6 +261,8 @@ public class FrmSesiones extends javax.swing.JPanel {
         });
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235)); // Azul brillante
+        btnGuardar.setForeground(java.awt.Color.WHITE);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -257,6 +270,8 @@ public class FrmSesiones extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99)); // Gris oscuro oscuro
+        btnCancelar.setForeground(java.awt.Color.WHITE);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -264,6 +279,8 @@ public class FrmSesiones extends javax.swing.JPanel {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38)); // Rojo
+        btnEliminar.setForeground(java.awt.Color.WHITE);
 
         tblSesiones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

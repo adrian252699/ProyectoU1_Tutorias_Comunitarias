@@ -8,7 +8,7 @@ import java.awt.CardLayout;
 
 /**
  *
- * @author jalt2
+ * @author Ricardo
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
@@ -160,25 +160,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the FlatLaf Dark look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            javax.swing.UIManager.put("defaultFont", new java.awt.Font("Fira Code", java.awt.Font.PLAIN, 14));
+            
+            // VS Code Dark Background (#1E1E1E -> 30, 30, 30)
+            javax.swing.UIManager.put("control", new java.awt.Color(30, 30, 30));
+            javax.swing.UIManager.put("Panel.background", new java.awt.Color(30, 30, 30));
+            javax.swing.UIManager.put("RootPane.background", new java.awt.Color(30, 30, 30));
+            javax.swing.UIManager.put("Viewport.background", new java.awt.Color(30, 30, 30));
+            javax.swing.UIManager.put("OptionPane.background", new java.awt.Color(30, 30, 30));
+            
+            // Advanced UI styling
+            javax.swing.UIManager.put("Button.arc", 15); // Rounded buttons
+            javax.swing.UIManager.put("Component.arc", 15); // Rounded text fields and dropdowns
+            javax.swing.UIManager.put("TextComponent.arc", 15); 
+            javax.swing.UIManager.put("ScrollBar.thumbArc", 999); // Round thumbs like macOS
+            javax.swing.UIManager.put("ScrollBar.thumbInsets", new java.awt.Insets(2, 2, 2, 2));
+            javax.swing.UIManager.put("Table.selectionBackground", new java.awt.Color(37, 99, 235)); // Vibrant blue selection
+            javax.swing.UIManager.put("Table.alternateRowColor", new java.awt.Color(45, 48, 56)); // Dark alternating rows
+            javax.swing.UIManager.put("TabbedPane.selectedBackground", new java.awt.Color(37, 99, 235));
+            
+            javax.swing.UIManager.setLookAndFeel(new com.formdev.flatlaf.FlatDarkLaf());
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

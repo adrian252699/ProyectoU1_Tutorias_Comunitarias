@@ -80,7 +80,7 @@
                       <Component id="pnlContenido" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="114" max="32767" attributes="0"/>
+              <EmptySpace pref="45" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -107,7 +107,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="95" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="698" max="32767" attributes="0"/>
+                  <EmptySpace pref="910" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -47,6 +47,38 @@ public class FrmTutor extends javax.swing.JPanel {
                     );
                     return;
             }
+            
+            if (!telefono.matches("^[0-9]+$")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El teléfono solo puede contener números.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            if (!telefono.matches("^[0-9]{10}$")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El teléfono debe contener exactamente 10 números.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            if (!correo.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Ingrese un correo con el siguiente formato (correo@ejemplo)",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            
 
             if (btnGuardar.getText().equals("Guardar")) {
                 boolean exito = tuController.insertarTutor(nombre, especialidad, telefono, correo);
@@ -190,10 +222,10 @@ public class FrmTutor extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MENU TUTORES");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(37, 99, 235));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MENU TUTORES");
 
         jLabel2.setText("ID Tutor:");
 
@@ -204,6 +236,8 @@ public class FrmTutor extends javax.swing.JPanel {
         jLabel5.setText("Telefono:");
 
         jLabel6.setText("Correo");
+
+        txtIdTutor.setEnabled(false);
 
         tblTutores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -225,8 +259,8 @@ public class FrmTutor extends javax.swing.JPanel {
 
         btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.setBackground(new java.awt.Color(37, 99, 235)); // Azul brillante
-        btnGuardar.setForeground(java.awt.Color.WHITE);
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -235,8 +269,8 @@ public class FrmTutor extends javax.swing.JPanel {
 
         btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.setBackground(new java.awt.Color(75, 85, 99)); // Gris oscuro oscuro
-        btnCancelar.setForeground(java.awt.Color.WHITE);
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -245,8 +279,8 @@ public class FrmTutor extends javax.swing.JPanel {
 
         btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
-        btnEliminar.setBackground(new java.awt.Color(220, 38, 38)); // Rojo
-        btnEliminar.setForeground(java.awt.Color.WHITE);
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -259,7 +293,7 @@ public class FrmTutor extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Buscar en tabla");
+        jLabel7.setText("Filtrar por nombre");
 
         jLabel8.setText("Selecciona uno para editar o eliminar...");
 

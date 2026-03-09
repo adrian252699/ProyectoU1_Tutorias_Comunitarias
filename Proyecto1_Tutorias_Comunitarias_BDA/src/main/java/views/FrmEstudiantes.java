@@ -32,7 +32,7 @@ public class FrmEstudiantes extends javax.swing.JPanel {
             String telefono = txtTelefono.getText().trim();
             LocalDate fechaNacimiento = dateFechaNacimiento.getDate();
 
-            if (nombre.isEmpty()||gradoEscolar.isEmpty()||escuelaProcedencia.isEmpty()||telefono.isEmpty()) {
+            if (nombre.isEmpty()||gradoEscolar.isEmpty()||escuelaProcedencia.isEmpty()||telefono.isEmpty()||fechaNacimiento == null) {
                 JOptionPane.showMessageDialog(
                             this,
                             "Todos los campos son obligatorios.",
@@ -42,7 +42,27 @@ public class FrmEstudiantes extends javax.swing.JPanel {
                     return;
             }
             
-            if (fechaNacimiento != null && fechaNacimiento.isAfter(LocalDate.now())) {
+            if (!telefono.matches("^[0-9]+$")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El teléfono solo puede contener números.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            if (!telefono.matches("^[0-9]{10}$")) {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "El teléfono debe contener exactamente 10 números.",
+                        "Error",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+            
+            if (fechaNacimiento.isAfter(LocalDate.now())) {
                 JOptionPane.showMessageDialog(
                             this,
                             "La fecha no puede ser mayor a la actual",

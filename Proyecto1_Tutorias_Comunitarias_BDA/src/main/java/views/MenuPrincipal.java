@@ -4,21 +4,24 @@
  */
 package views;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Ricardo
  */
 public class MenuPrincipal extends javax.swing.JFrame {
-
+    private JPanel frmActual;
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.pnlContenido.setLayout(new CardLayout());
+        pnlContenido.setLayout(new CardLayout());
+        
 
     }
 
@@ -127,35 +130,66 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void mnuEstudiantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEstudiantesActionPerformed
         // TODO add your handling code here:
-        pnlContenido.add(new FrmEstudiantes(), "estudiantes");
+        if (frmActual != null) {
+            pnlContenido.remove(frmActual);
+        }
+        
+        FrmEstudiantes frmEstudiantes = new FrmEstudiantes();
+        
+        pnlContenido.add(frmEstudiantes, "estudiantes");
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "estudiantes");
         
-        
-        
+        frmActual=frmEstudiantes;
+
     }//GEN-LAST:event_mnuEstudiantesActionPerformed
 
     private void mnuTutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuTutoresActionPerformed
         // TODO add your handling code here:
-        pnlContenido.add(new FrmTutor(), "tutores");
+        if (frmActual != null) {
+            pnlContenido.remove(frmActual);
+        }
+        
+        FrmTutor frmTutor = new FrmTutor();
+        pnlContenido.add(frmTutor, "tutores");
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "tutores");
+        
+        frmActual = frmTutor;
     }//GEN-LAST:event_mnuTutoresActionPerformed
 
     private void mnuMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMateriasActionPerformed
         // TODO add your handling code here:
-        pnlContenido.add(new FrmMaterias(), "materias");
+        if (frmActual != null) {
+            pnlContenido.remove(frmActual);
+        }
+        
+        FrmMaterias frmMaterias = new FrmMaterias();
+        
+        pnlContenido.add(frmMaterias, "materias");
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "materias");
+        
+        frmActual = frmMaterias;
+        
     }//GEN-LAST:event_mnuMateriasActionPerformed
 
     private void mnuSesionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSesionesActionPerformed
         // TODO add your handling code here:
-        pnlContenido.add(new FrmSesiones(), "sesiones");
+        if (frmActual != null) {
+            pnlContenido.remove(frmActual);
+        }
+        
+        FrmSesiones frmSesiones = new FrmSesiones();
+        
+        pnlContenido.add(frmSesiones, "sesiones");
         CardLayout cl = (CardLayout) pnlContenido.getLayout();
         cl.show(pnlContenido, "sesiones");
+        
+        frmActual = frmSesiones;
     }//GEN-LAST:event_mnuSesionesActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */

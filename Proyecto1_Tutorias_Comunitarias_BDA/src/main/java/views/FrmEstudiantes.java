@@ -30,9 +30,9 @@ public class FrmEstudiantes extends javax.swing.JPanel {
             String gradoEscolar = cmbGradoEscolar.getSelectedItem().toString();
             String escuelaProcedencia = txtEscuela.getText().trim();
             String telefono = txtTelefono.getText().trim();
-            Date fechaNacimiento = Date.valueOf(dateFechaNacimiento.getDate());
+            LocalDate fechaNacimiento = dateFechaNacimiento.getDate();
 
-            if (nombre.isEmpty()||gradoEscolar.isEmpty()||escuelaProcedencia.isEmpty()||telefono.isEmpty()||fechaNacimiento==null) {
+            if (nombre.isEmpty()||gradoEscolar.isEmpty()||escuelaProcedencia.isEmpty()||telefono.isEmpty()) {
                 JOptionPane.showMessageDialog(
                             this,
                             "Todos los campos son obligatorios.",
@@ -41,9 +41,20 @@ public class FrmEstudiantes extends javax.swing.JPanel {
                     );
                     return;
             }
-
+            
+            if (fechaNacimiento != null && fechaNacimiento.isAfter(LocalDate.now())) {
+                JOptionPane.showMessageDialog(
+                            this,
+                            "La fecha no puede ser mayor a la actual",
+                            "Error",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                return;    
+            }
+            
+            
             if (btnGuardar.getText().equals("Guardar")) {
-                boolean exito = clEstudiante.insertarEstudiante(nombre, gradoEscolar, escuelaProcedencia, telefono, fechaNacimiento);
+                boolean exito = clEstudiante.insertarEstudiante(nombre, gradoEscolar, escuelaProcedencia, telefono, Date.valueOf(fechaNacimiento));
 
                 if (exito) {
                     JOptionPane.showMessageDialog(this, "Estudiante guardado correctamente.");
@@ -97,6 +108,7 @@ public class FrmEstudiantes extends javax.swing.JPanel {
         cmbGradoEscolar.setSelectedIndex(0);
         txtEscuela.setText("");
         txtTelefono.setText("");
+        dateFechaNacimiento.setText("");
         btnGuardar.setText("Guardar");
         btnEliminar.setVisible(false);
             

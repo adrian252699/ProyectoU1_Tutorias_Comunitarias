@@ -10,29 +10,22 @@ import javax.swing.JOptionPane;
 public class FrmMaterias extends javax.swing.JPanel {
     
     private MateriaController maController;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> rowSorter;
     
     /**
      * Creates new form FrmMaterias
      */
     public FrmMaterias() {
         initComponents();
-        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
-        btnGuardar.setForeground(java.awt.Color.WHITE);
-        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
-        btnCancelar.setForeground(java.awt.Color.WHITE);
-        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
-        btnEliminar.setForeground(java.awt.Color.WHITE);
-
-        // Titulo
-        jLabel1.setText("<html><font color='white'>MENU</font> <font color='#f97316'>MATERIAS</font></html>");
-        jLabel1.putClientProperty("FlatLaf.styleClass", "h1");
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         maController = new MateriaController();
         cargarTablaMaterias();
     }
     private void cargarTablaMaterias(){
-        tblMaterias.setModel(maController.obtenerTablaMaterias());
+        javax.swing.table.DefaultTableModel model = maController.obtenerTablaMaterias();
+        tblMaterias.setModel(model);
+        
+        rowSorter = new javax.swing.table.TableRowSorter<>(model);
+        tblMaterias.setRowSorter(rowSorter);
     }
     
     private void guardarMateria(){
@@ -153,11 +146,12 @@ public class FrmMaterias extends javax.swing.JPanel {
     }
     
     private void buscar(){
-        String nombre = txtFiltro.getText().trim();
-        if (nombre.isEmpty()) {
-            cargarTablaMaterias();
-        }else{
-            tblMaterias.setModel(maController.obtenerTablaMateriasFiltro(nombre));
+        String texto = txtFiltro.getText().trim();
+        if (texto.isEmpty()) {
+            rowSorter.setRowFilter(null);
+        } else {
+            // (?i) makes the regex case-insensitive
+            rowSorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(texto)));
         }
     }
 
@@ -202,8 +196,9 @@ public class FrmMaterias extends javax.swing.JPanel {
         );
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Menu Materias");
+        jLabel1.setText("MENU MATERIAS");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(37, 99, 235));
 
         jLabel2.setText("ID Materia:");
 
@@ -222,6 +217,8 @@ public class FrmMaterias extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtDescripcion);
 
         btnGuardar.setText("Guardar");
+        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
+        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -229,6 +226,8 @@ public class FrmMaterias extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -236,6 +235,8 @@ public class FrmMaterias extends javax.swing.JPanel {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
@@ -266,7 +267,7 @@ public class FrmMaterias extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("Filtar por nombre");
+        jLabel6.setText("Buscar en tabla");
 
         jLabel7.setText("Selecciona para editar o eliminar");
 

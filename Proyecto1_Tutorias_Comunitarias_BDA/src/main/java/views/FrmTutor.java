@@ -11,30 +11,24 @@ import javax.swing.JOptionPane;
 public class FrmTutor extends javax.swing.JPanel {
     
     private TutorController tuController;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> rowSorter;
     
     /**
      * Creates new form FrmTutor
      */
     public FrmTutor() {
         initComponents();
-        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
-        btnGuardar.setForeground(java.awt.Color.WHITE);
-        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
-        btnCancelar.setForeground(java.awt.Color.WHITE);
-        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
-        btnEliminar.setForeground(java.awt.Color.WHITE);
-
-        jLabel1.setText("<html><font color='white'>MENU</font> <font color='#f97316'>TUTORES</font></html>");
-        jLabel1.putClientProperty("FlatLaf.styleClass", "h1");
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         tuController = new TutorController();
         cargarTablaTutores();
         this.btnEliminar.setVisible(false);
     }
     
     private void cargarTablaTutores(){
-        tblTutores.setModel(tuController.obtenerTablaTutores());
+        javax.swing.table.DefaultTableModel model = tuController.obtenerTablaTutores();
+        tblTutores.setModel(model);
+        
+        rowSorter = new javax.swing.table.TableRowSorter<>(model);
+        tblTutores.setRowSorter(rowSorter);
     }
     
     private void guardarTutor(){
@@ -157,11 +151,12 @@ public class FrmTutor extends javax.swing.JPanel {
     }
     
     private void buscar(){
-        String nombre = txtFiltro.getText().trim();
-        if (nombre.isEmpty()) {
-            cargarTablaTutores();
-        }else{
-            tblTutores.setModel(tuController.obtenerTablaTutoresFiltro(nombre));
+        String texto = txtFiltro.getText().trim();
+        if (texto.isEmpty()) {
+            rowSorter.setRowFilter(null);
+        } else {
+            // (?i) makes the regex case-insensitive
+            rowSorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(texto)));
         }
     }
     
@@ -195,8 +190,10 @@ public class FrmTutor extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MENU TUTORES");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Menu Tutor");
+        jLabel1.setForeground(new java.awt.Color(37, 99, 235));
 
         jLabel2.setText("ID Tutor:");
 
@@ -262,7 +259,7 @@ public class FrmTutor extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Filtrar por nombre");
+        jLabel7.setText("Buscar en tabla");
 
         jLabel8.setText("Selecciona uno para editar o eliminar...");
 

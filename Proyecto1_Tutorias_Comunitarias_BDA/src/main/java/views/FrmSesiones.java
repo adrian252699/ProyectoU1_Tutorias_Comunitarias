@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package views;
 
 import controllers.EstudianteController;
@@ -35,23 +31,15 @@ public class FrmSesiones extends javax.swing.JPanel {
     private Tutor tutor;
     private final MateriaController maController;
     private Materia materia;
+    private javax.swing.table.TableRowSorter<javax.swing.table.DefaultTableModel> rowSorter;
+    private javax.swing.JTextField txtFiltro;
+    private javax.swing.JLabel lblFiltro;
     
     /**
      * Creates new form FrmSesiones
      */
     public FrmSesiones() {
         initComponents();
-        btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
-        btnGuardar.setForeground(java.awt.Color.WHITE);
-        btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
-        btnCancelar.setForeground(java.awt.Color.WHITE);
-        btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
-        btnEliminar.setForeground(java.awt.Color.WHITE);
-
-        jLabel1.setText("<html><font color='white'>MENU</font> <font color='#f97316'>SESIONES</font></html>");
-        jLabel1.putClientProperty("FlatLaf.styleClass", "h1");
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         clEstudiante= new EstudianteController();
         seController = new SesionTutoriaController();
         tuController = new TutorController();
@@ -80,6 +68,19 @@ public class FrmSesiones extends javax.swing.JPanel {
         }   
 
         tblSesiones.setModel(modelo);
+        
+        rowSorter = new javax.swing.table.TableRowSorter<>(modelo);
+        tblSesiones.setRowSorter(rowSorter);
+    }
+    
+    private void buscar(){
+        String texto = txtFiltro.getText().trim();
+        if (texto.isEmpty()) {
+            rowSorter.setRowFilter(null);
+        } else {
+            // (?i) makes the regex case-insensitive
+            rowSorter.setRowFilter(javax.swing.RowFilter.regexFilter("(?i)" + java.util.regex.Pattern.quote(texto)));
+        }
     }
     
     private void guardarMateria(){
@@ -231,9 +232,20 @@ public class FrmSesiones extends javax.swing.JPanel {
         btnBuscarEstudiante = new javax.swing.JButton();
         btnBuscarTutor = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        
+        lblFiltro = new javax.swing.JLabel();
+        lblFiltro.setText("Buscar en tabla:");
+        txtFiltro = new javax.swing.JTextField();
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                buscar();
+            }
+        });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MENU SESIONES");
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel1.setText("Menu Sesiones");
+        jLabel1.setForeground(new java.awt.Color(37, 99, 235));
 
         jLabel2.setText("ID Sesion:");
 
@@ -359,6 +371,10 @@ public class FrmSesiones extends javax.swing.JPanel {
                                 .addGap(43, 43, 43)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblFiltro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(scrContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 595, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(75, 75, Short.MAX_VALUE))
         );
@@ -373,9 +389,14 @@ public class FrmSesiones extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblFiltro)
+                                    .addComponent(txtFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtIdSesion))
-                        .addGap(28, 28, 28)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(scrContenido, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))

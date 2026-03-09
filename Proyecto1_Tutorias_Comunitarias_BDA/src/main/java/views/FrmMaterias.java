@@ -105,7 +105,7 @@ public class FrmMaterias extends javax.swing.JPanel {
             cmbNivel.setSelectedItem(tblMaterias.getValueAt(fila,2).toString());
             txtDescripcion.setText(tblMaterias.getValueAt(fila,3).toString());
             
-            btnGuardar.setText("Actuailizar");
+            btnGuardar.setText("Actualizar");
             btnEliminar.setVisible(true);
         }
     }
@@ -216,6 +216,7 @@ public class FrmMaterias extends javax.swing.JPanel {
         txtDescripcion.setRows(5);
         jScrollPane1.setViewportView(txtDescripcion);
 
+        btnGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.setBackground(new java.awt.Color(37, 99, 235));
         btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,6 +226,7 @@ public class FrmMaterias extends javax.swing.JPanel {
             }
         });
 
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBackground(new java.awt.Color(75, 85, 99));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -234,6 +236,7 @@ public class FrmMaterias extends javax.swing.JPanel {
             }
         });
 
+        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setBackground(new java.awt.Color(220, 38, 38));
         btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,7 +270,7 @@ public class FrmMaterias extends javax.swing.JPanel {
             }
         });
 
-        jLabel6.setText("Buscar en tabla");
+        jLabel6.setText("Filtrar por nombre");
 
         jLabel7.setText("Selecciona para editar o eliminar");
 
